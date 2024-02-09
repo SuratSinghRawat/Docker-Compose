@@ -1,0 +1,10 @@
+version: '3'
+services:
+  ReactApp:
+    image: ec2-65-0-23-242.ap-south-1.compute.amazonaws.com:8082/react-login-app:Latest
+    ports:
+      - 3001:3000
+  SpringBoot:
+    image: ec2-65-0-23-242.ap-south-1.compute.amazonaws.com:8082/mvn-hello-spring:6
+    ports:
+      - 8008:8088
