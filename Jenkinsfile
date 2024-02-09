@@ -1,5 +1,5 @@
 pipeline {
-    agent {docker_server}
+    agent {label 'docker_server'}
     stages {
         stage('verify tools'){
             steps{
