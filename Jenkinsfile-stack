@@ -12,7 +12,7 @@ pipeline {
         }
         stage('deploy stack'){
             steps{
-                sh 'docker stack deploy -c myapp.yml react_spring'
+                sh 'docker stack deploy -c docker-stack.yml react_spring'
             }
         }
     }
