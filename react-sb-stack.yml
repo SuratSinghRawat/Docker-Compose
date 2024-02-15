@@ -1,0 +1,45 @@
+version: "3"
+services:
+  myreact:
+    image: 3.110.136.84:8082/react-login-app:Latest
+    ports: 
+      - 3001:3000
+    networks:
+      - frontend
+    deploy: 
+      replicas: 3
+      update_config:
+        parallelisum: 2
+        delay: 1s
+      restart_policy:
+        condition: on-failure
+
+  sprintboot:
+    image: 3.110.136.84:8082/mvn-hello-spring:6
+    ports:
+      - 8008:8088
+    networks:
+      - backend
+    deploy: 
+      replicas: 3
+      update_config:
+        parallelisum: 2
+        delay: 1s
+      restart_policy:
+        condition: on-failure
+
+
+  visualizer: 
+    image: dockersamples/visualizer:latest
+    ports: 
+      - 8000:8080
+    stop_grace_period: 1m30s
+    volumes: 
+      -"/var/visualizer/:/var/run/docker.sock"
+    deploy: 
+      placement:
+        constraints: [node.role == manager]
+networks:
+  frontend:
+  backend:
+

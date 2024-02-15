@@ -1,0 +1,30 @@
+version: "3"
+services:
+  myreact:
+    image: react-login-app:7
+    ports: 
+      - 3001:3000
+    networks:
+      - frontend
+    deploy: 
+      replicas: 1
+      restart_policy:
+        condition: on-failure
+      placement:
+        constraints: [node.role == worker]
+
+  sprintboot:
+    image: mvn-hello-spring:7
+    ports:
+      - 8008:8088
+    networks:
+      - backend
+    deploy: 
+      replicas: 3
+      restart_policy:
+        condition: on-failure
+        
+networks:
+  frontend:
+  backend:
+
