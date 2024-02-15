@@ -1,0 +1,19 @@
+pipeline {
+    agent {label 'docker_server'}
+    stages {
+        stage('verify tools'){
+            steps{
+             sh '''
+                docker version
+                docker info
+                
+             '''
+            }
+        }
+        stage('deploy stack'){
+            steps{
+                sh 'docker stack deploy -c myapp.yml react_spring'
+            }
+        }
+    }
+}
